@@ -101,4 +101,8 @@ public class ColegioControlador {
         }
         return total;
     }
+    
+    public boolean hayDatos() {
+        return !profesores.isEmpty() || !estudiantes.isEmpty();
+    }
 }
