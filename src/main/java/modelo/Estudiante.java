@@ -57,4 +57,14 @@ public class Estudiante extends Persona {
             return "Insuficiente";
         }
     }
+    
+    @Override
+    public String obtenerInfo() {
+        return super.obtenerInfo() + "\n" +
+               "Grado: " + grado + "\n" +
+               "Código Estudiante: " + codigoEstudiante + "\n" +
+               "Promedio: " + String.format("%.2f", promedio) + "\n" +
+               "Rendimiento: " + calcularRendimiento() + "\n" +
+               "Estado: " + (aprobo() ? "APROBADO" : "REPROBADO");
+    }
 }
