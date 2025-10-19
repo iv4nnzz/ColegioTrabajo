@@ -8,6 +8,20 @@ package controlador;
  *
  * @author 9spot
  */
-public class ColegioControlador {
+import modelo.Profesor;
+import modelo.Estudiante;
+import vista.ColegioVista;
+import java.util.ArrayList;
 
+
+public class ColegioControlador {
+    private ArrayList<Profesor> profesores;
+    private ArrayList<Estudiante> estudiantes;
+    private ColegioVista vista;
+    
+    public ColegioControlador(ColegioVista vista) {
+        this.vista = vista;
+        this.profesores = new ArrayList<>();
+        this.estudiantes = new ArrayList<>();
+    }
 }
