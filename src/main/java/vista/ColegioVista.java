@@ -12,6 +12,9 @@ import controlador.ColegioControlador;
 import modelo.Profesor;
 import modelo.Estudiante;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import java.util.List;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -31,7 +34,131 @@ public class ColegioVista {
         }
         mostrarMensaje("Gracias por usar el Sistema del Colegio");
     }
-
+    
+    private boolean mostrarMenu() {
+        String[] opciones = {"Registrar Profesor", "Registrar Estudiante", 
+                            "Ver Reportes", "Salir"};
+        
+        int seleccion = JOptionPane.showOptionDialog(
+            null,
+            "═══════════════════════════════════\n" +
+            "   SISTEMA DE GESTIÓN DEL COLEGIO\n" +
+            "═══════════════════════════════════\n\n" +
+            "Seleccione una opción:",
+            "Menú Principal",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.INFORMATION_MESSAGE,
+            null,
+            opciones,
+            opciones[0]
+        );
+        
+        switch (seleccion) {
+            case 0:
+                solicitarDatosProfesor();
+                return true;
+            case 1:
+                solicitarDatosEstudiante();
+                return true;
+            case 2:
+                mostrarReportes();
+                return true;
+            case 3:
+            case JOptionPane.CLOSED_OPTION:
+                return false;
+            default:
+                return true;
+        }
+    }
+    
+    public String solicitarDatoValidado(String mensaje, String tipo) {
+        while (true) {
+            String dato = JOptionPane.showInputDialog(mensaje);
+            if (dato == null) return null; 
+            if (dato.trim().isEmpty()) {
+                mostrarError("Este campo es obligatorio.");
+                continue;
+            }
+            
+            switch (tipo) {
+                case "nombre":
+                    if (!dato.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$")) {
+                        mostrarError("El nombre solo puede contener letras y espacios.");
+                        continue;
+                    }
+                    return dato.trim();
+                case "cedula":
+                    if (!dato.matches("\\d+")) {
+                        mostrarError("La cédula debe contener solo números.");
+                        continue;
+                    }
+                    return dato.trim();
+                case "telefono":
+                    if (!dato.matches("[0-9+\\- ]{6,20}")) {
+                        mostrarError("Teléfono inválido. Use números (6-20 dígitos), puede incluir + o - .");
+                        continue;
+                    }
+                    return dato.trim();
+                case "fecha":
+                    if (!esFechaValida(dato)) {
+                        mostrarError("Formato de fecha inválido. Use dd/mm/aaaa.");
+                        continue;
+                    }
+                    return dato.trim();
+                case "fecha_mayor18":
+                    int edad = calcularEdadDesdeFecha(dato);
+                    if (edad == -1) {
+                        mostrarError("Formato de fecha inválido. Use dd/mm/aaaa.");
+                        continue;
+                    }
+                    if (edad < 18) {
+                        mostrarError("La persona debe ser mayor de edad (18 años o más). Edad detectada: " + edad);
+                        continue;
+                    }
+                    return dato.trim();
+                case "double_nonneg":
+                    try {
+                        double v = Double.parseDouble(dato);
+                        if (v < 0) {
+                            mostrarError("El valor no puede ser negativo.");
+                            continue;
+                        }
+                        return dato.trim();
+                    } catch (NumberFormatException e) {
+                        mostrarError("Ingrese un número válido (puede contener decimales).");
+                        continue;
+                    }
+                case "int_nonneg":
+                    try {
+                        int vi = Integer.parseInt(dato);
+                        if (vi < 0) {
+                            mostrarError("El valor no puede ser negativo.");
+                            continue;
+                        }
+                        return dato.trim();
+                    } catch (NumberFormatException e) {
+                        mostrarError("Ingrese un número entero válido.");
+                        continue;
+                    }
+                case "promedio":
+                    try {
+                        double p = Double.parseDouble(dato);
+                        if (p < 0.0 || p > 5.0) {
+                            mostrarError("El promedio debe estar entre 0.0 y 5.0.");
+                            continue;
+                        }
+                        return dato.trim();
+                    } catch (NumberFormatException e) {
+                        mostrarError("Ingrese un número válido (ej: 3.5).");
+                        continue;
+                    }
+                case "obligatorio":
+                default:
+                    return dato.trim();
+            }
+        }
+    }
+    
     private boolean esFechaValida(String fecha) {
         try {
             DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
