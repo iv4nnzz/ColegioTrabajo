@@ -29,4 +29,18 @@ public class Estudiante extends Persona {
     public boolean aprobo() {
         return promedio >= 3.0;
     }
+    
+    public String calcularRendimiento() {
+        if (promedio >= 4.5) {
+            return "Excelente";
+        } else if (promedio >= 4.0) {
+            return "Sobresaliente";
+        } else if (promedio >= 3.5) {
+            return "Bueno";
+        } else if (promedio >= 3.0) {
+            return "Aceptable";
+        } else {
+            return "Insuficiente";
+        }
+    }
 }
