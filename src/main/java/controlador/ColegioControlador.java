@@ -93,4 +93,12 @@ public class ColegioControlador {
             }
         });
     }
+    
+    public double calcularTotalPrestaciones() {
+        double total = 0;
+        for (Profesor profesor : profesores) {
+            total += profesor.calcularPrestaciones();
+        }
+        return total;
+    }
 }
