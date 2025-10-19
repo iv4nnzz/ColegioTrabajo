@@ -41,9 +41,7 @@ public class ColegioVista {
         
         int seleccion = JOptionPane.showOptionDialog(
             null,
-            "═══════════════════════════════════\n" +
             "   SISTEMA DE GESTIÓN DEL COLEGIO\n" +
-            "═══════════════════════════════════\n\n" +
             "Seleccione una opción:",
             "Menú Principal",
             JOptionPane.DEFAULT_OPTION,
@@ -69,6 +67,58 @@ public class ColegioVista {
             default:
                 return true;
         }
+    }
+    
+    public void mostrarReportes() {
+        if (!controlador.hayDatos()) {
+            mostrarError("No hay datos registrados para generar reportes");
+            return;
+        }
+        
+        StringBuilder reporte = new StringBuilder();
+        
+        reporte.append("REPORTE DE ESTUDIANTES\n");
+        
+        List<Estudiante> estudiantes = controlador.obtenerEstudiantes();
+        
+        if (estudiantes.isEmpty()) {
+            reporte.append("No hay estudiantes registrados.\n\n");
+        } else {
+            for (int i = 0; i < estudiantes.size(); i++) {
+                reporte.append("ESTUDIANTE #").append(i + 1).append(" ─────────────────────────────\n");
+                reporte.append(estudiantes.get(i).obtenerInfo());
+            }
+        }
+        
+        reporte.append("REPORTE DE PROFESORES (Ordenado por Salario)\n");
+        
+        List<Profesor> profesores = controlador.obtenerProfesores();
+        
+        if (profesores.isEmpty()) {
+            reporte.append("No hay profesores registrados.\n\n");
+        } else {
+            controlador.ordenarProfesoresPorSalario();
+            
+            for (int i = 0; i < profesores.size(); i++) {
+                reporte.append("┌─ PROFESOR #").append(i + 1).append(" ──────────────────────────────┐\n");
+                reporte.append(profesores.get(i).obtenerInfo());
+            }
+            
+            double totalPrestaciones = controlador.calcularTotalPrestaciones();
+            reporte.append("TOTAL PRESTACIONES SOCIALES: $");
+            reporte.append(String.format("%-20.2f", totalPrestaciones));
+        }
+        
+        JTextArea textArea = new JTextArea(reporte.toString());
+        textArea.setEditable(false);
+        textArea.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 12));
+        
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new java.awt.Dimension(650, 550));
+        
+        JOptionPane.showMessageDialog(null, scrollPane, 
+                                     "Reportes del Sistema", 
+                                     JOptionPane.INFORMATION_MESSAGE);
     }
     
     public String solicitarDatoValidado(String mensaje, String tipo) {
