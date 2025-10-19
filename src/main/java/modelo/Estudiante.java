@@ -25,4 +25,8 @@ public class Estudiante extends Persona {
         this.codigoEstudiante = codigoEstudiante;
         this.promedio = promedio;
     }
+    
+    public boolean aprobo() {
+        return promedio >= 3.0;
+    }
 }
