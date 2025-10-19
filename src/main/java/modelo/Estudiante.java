@@ -43,4 +43,18 @@ public class Estudiante extends Persona {
             return "Insuficiente";
         }
     }
+    
+    public String calcularRendimiento(double promedioSimulado) {
+        if (promedioSimulado >= 4.5) {
+            return "Excelente";
+        } else if (promedioSimulado >= 4.0) {
+            return "Sobresaliente";
+        } else if (promedioSimulado >= 3.5) {
+            return "Bueno";
+        } else if (promedioSimulado >= 3.0) {
+            return "Aceptable";
+        } else {
+            return "Insuficiente";
+        }
+    }
 }
