@@ -69,6 +69,42 @@ public class ColegioVista {
         }
     }
     
+    public void solicitarDatosEstudiante() {
+        try {
+            String nombre = solicitarDatoValidado("Ingrese el nombre del estudiante:", "nombre");
+            if (nombre == null) return;
+            
+            String direccion = solicitarDatoValidado("Ingrese la dirección:", "obligatorio");
+            if (direccion == null) return;
+            
+            String telefono = solicitarDatoValidado("Ingrese el teléfono:", "telefono");
+            if (telefono == null) return;
+            
+            String fechaNacimiento = solicitarDatoValidado("Ingrese la fecha de nacimiento (dd/mm/aaaa):", "fecha");
+            if (fechaNacimiento == null) return;
+            
+            String grado = solicitarDatoValidado("Ingrese el grado\n(Ej: 3° A, 10° B, 11° C):", "obligatorio");
+            if (grado == null) return;
+            
+            String codigoEstudiante = solicitarDatoValidado("Ingrese el código del estudiante:", "obligatorio");
+            if (codigoEstudiante == null) return;
+            
+            String promedioStr = solicitarDatoValidado("Ingrese el promedio del estudiante\n(Escala de 0.0 a 5.0):", "promedio");
+            if (promedioStr == null) return;
+            double promedio = Double.parseDouble(promedioStr);
+            
+            controlador.agregarEstudiante(nombre, direccion, telefono, fechaNacimiento,
+                                         grado, codigoEstudiante, promedio);
+            
+            mostrarMensaje("Estudiante registrado exitosamente");
+            
+        } catch (NumberFormatException e) {
+            mostrarError("Error: Debe ingresar valores numéricos válidos");
+        } catch (IllegalArgumentException e) {
+            mostrarError("Error: " + e.getMessage());
+        }
+    }
+    
     public void mostrarReportes() {
         if (!controlador.hayDatos()) {
             mostrarError("No hay datos registrados para generar reportes");
