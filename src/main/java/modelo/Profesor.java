@@ -29,4 +29,10 @@ public class Profesor extends Persona {
     public void setHorasTrabajadas(int horasTrabajadas) {
         this.horasTrabajadas = horasTrabajadas;
     }
+    
+    public double calcularSalarioTotal() {
+        double salarioBase = salarioPorHora * horasTrabajadas;
+        double bonificacion = salarioBase * 0.20; 
+        return salarioBase + bonificacion;
+    }
 }
