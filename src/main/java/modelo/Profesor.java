@@ -8,6 +8,25 @@ package modelo;
  *
  * @author 9spot
  */
-public class Profesor {
-
+public class Profesor extends Persona {
+    private String cedula;
+    private String area;
+    private double salarioPorHora;
+    private int horasTrabajadas;
+    
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+    
+    public void setArea(String area) {
+        this.area = area;
+    }
+    
+    public void setSalarioPorHora(double salarioPorHora) {
+        this.salarioPorHora = salarioPorHora;
+    }
+    
+    public void setHorasTrabajadas(int horasTrabajadas) {
+        this.horasTrabajadas = horasTrabajadas;
+    }
 }
