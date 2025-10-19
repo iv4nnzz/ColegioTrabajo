@@ -9,6 +9,13 @@ package modelo;
  * @author 9spot
  */
 
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+
 public class Persona {
     protected String nombre;
     protected String direccion;
@@ -38,5 +45,22 @@ public class Persona {
         this.fechaNacimiento = fechaNacimiento;
     }
     
+    public int calcularEdad() {
+        try {
+            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            
+            LocalDate fechaNac = null;
+            try {
+                fechaNac = LocalDate.parse(fechaNacimiento, formatter1);
+            } catch (DateTimeParseException e) {
+                fechaNac = LocalDate.parse(fechaNacimiento, formatter2);
+            }
+            
+            LocalDate fechaActual = LocalDate.now();
+            return Period.between(fechaNac, fechaActual).getYears();
+        } catch (Exception e) {
+            return -1; 
+        }
+    }
 }
-
