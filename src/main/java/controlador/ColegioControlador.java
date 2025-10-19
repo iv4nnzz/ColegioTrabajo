@@ -80,4 +80,8 @@ public class ColegioControlador {
     public List<Profesor> obtenerProfesores() {
         return Collections.unmodifiableList(profesores);
     }
+    
+    public List<Estudiante> obtenerEstudiantes() {
+        return Collections.unmodifiableList(estudiantes);
+    }
 }
