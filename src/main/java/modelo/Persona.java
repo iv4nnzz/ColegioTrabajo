@@ -63,4 +63,20 @@ public class Persona {
             return -1; 
         }
     }
+    
+    public boolean esMayorDeEdad() {
+        int edad = calcularEdad();
+        return edad >= 18;
+    }
+    
+    public String obtenerInfo() {
+        return "Nombre: " + nombre + "\n" +
+               "Dirección: " + direccion + "\n" +
+               "Teléfono: " + telefono + "\n" +
+               "Fecha de Nacimiento: " + fechaNacimiento;
+    }
+    
+    public String getNombre() {
+        return nombre;
+    }
 }
