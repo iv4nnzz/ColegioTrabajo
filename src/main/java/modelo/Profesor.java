@@ -51,4 +51,15 @@ public class Profesor extends Persona {
     public double calcularPrestaciones() {
         return calcularSalarioTotal() * 0.17;
     }
+    
+    @Override
+    public String obtenerInfo() {
+        return super.obtenerInfo() + "\n" +
+               "Cédula: " + cedula + "\n" +
+               "Área: " + area + "\n" +
+               "Salario por Hora: $" + String.format("%.2f", salarioPorHora) + "\n" +
+               "Horas Trabajadas: " + horasTrabajadas + "\n" +
+               "Salario Total (con 20% preparación): $" + String.format("%.2f", calcularSalarioTotal()) + "\n" +
+               "Prestaciones Sociales (17%): $" + String.format("%.2f", calcularPrestaciones());
+    }
 }
