@@ -69,6 +69,46 @@ public class ColegioVista {
         }
     }
     
+    public void solicitarDatosProfesor() {
+        try {
+            String nombre = solicitarDatoValidado("Ingrese el nombre del profesor:", "nombre");
+            if (nombre == null) return;
+            
+            String direccion = solicitarDatoValidado("Ingrese la dirección:", "obligatorio");
+            if (direccion == null) return;
+            
+            String telefono = solicitarDatoValidado("Ingrese el teléfono:", "telefono");
+            if (telefono == null) return;
+            
+            String fechaNacimiento = solicitarDatoValidado("Ingrese la fecha de nacimiento (dd/mm/aaaa):", "fecha_mayor18");
+            if (fechaNacimiento == null) return;
+            
+            String cedula = solicitarDatoValidado("Ingrese la cédula:", "cedula");
+            if (cedula == null) return;
+            
+            String area = solicitarDatoValidado("Ingrese el área de enseñanza\n(Ej: Matemáticas, Español, Ciencias):", "obligatorio");
+            if (area == null) return;
+            
+            String salarioStr = solicitarDatoValidado("Ingrese el salario por hora:", "double_nonneg");
+            if (salarioStr == null) return;
+            double salarioPorHora = Double.parseDouble(salarioStr);
+            
+            String horasStr = solicitarDatoValidado("Ingrese las horas trabajadas en el mes:", "int_nonneg");
+            if (horasStr == null) return;
+            int horasTrabajadas = Integer.parseInt(horasStr);
+            
+            controlador.agregarProfesor(nombre, direccion, telefono, fechaNacimiento,
+                                       cedula, area, salarioPorHora, horasTrabajadas);
+            
+            mostrarMensaje("Profesor registrado exitosamente");
+            
+        } catch (NumberFormatException e) {
+            mostrarError("Error: Debe ingresar valores numéricos válidos");
+        } catch (IllegalArgumentException e) {
+            mostrarError("Error: " + e.getMessage());
+        }
+    }
+    
     public void solicitarDatosEstudiante() {
         try {
             String nombre = solicitarDatoValidado("Ingrese el nombre del estudiante:", "nombre");
@@ -136,7 +176,7 @@ public class ColegioVista {
             controlador.ordenarProfesoresPorSalario();
             
             for (int i = 0; i < profesores.size(); i++) {
-                reporte.append("┌─ PROFESOR #").append(i + 1).append(" ──────────────────────────────┐\n");
+                reporte.append("┌─ PROFESOR #").append(i + 1).append(" ──────────────────────────────\n");
                 reporte.append(profesores.get(i).obtenerInfo());
             }
             
