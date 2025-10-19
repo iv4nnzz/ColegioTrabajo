@@ -56,4 +56,21 @@ public class ColegioControlador {
         
         profesores.add(profesor);
     }
+   
+    public void agregarEstudiante(String nombre, String direccion, String telefono,
+                                 String fechaNacimiento, String grado, 
+                                 String codigoEstudiante, double promedio) {
+        if (promedio < 0.0 || promedio > 5.0) {
+            throw new IllegalArgumentException("El promedio debe estar entre 0.0 y 5.0");
+        }
+        
+        if (codigoEstudiante == null || codigoEstudiante.trim().isEmpty()) {
+            throw new IllegalArgumentException("El código del estudiante es obligatorio");
+        }
+        
+        Estudiante estudiante = new Estudiante(nombre, direccion, telefono, 
+                                              fechaNacimiento, grado, 
+                                              codigoEstudiante, promedio);
+        estudiantes.add(estudiante);
+    }
 }
