@@ -105,4 +105,8 @@ public class ColegioControlador {
     public boolean hayDatos() {
         return !profesores.isEmpty() || !estudiantes.isEmpty();
     }
+    
+    public void iniciar() {
+        vista.iniciar();
+    }
 }
