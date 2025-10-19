@@ -35,4 +35,10 @@ public class Profesor extends Persona {
         double bonificacion = salarioBase * 0.20; 
         return salarioBase + bonificacion;
     }
+    
+    public double calcularSalarioTotal(int horas) {
+        double salarioBase = salarioPorHora * horas;
+        double bonificacion = salarioBase * 0.20;
+        return salarioBase + bonificacion;
+    }
 }
