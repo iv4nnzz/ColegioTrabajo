@@ -47,4 +47,8 @@ public class Profesor extends Persona {
         double bonificacion = salarioBase * porcentajeBonificacion;
         return salarioBase + bonificacion;
     }
+    
+    public double calcularPrestaciones() {
+        return calcularSalarioTotal() * 0.17;
+    }
 }
