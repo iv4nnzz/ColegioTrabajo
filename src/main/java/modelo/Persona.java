@@ -9,5 +9,9 @@ package modelo;
  * @author 9spot
  */
 public class Persona {
- 
+    protected String nombre;
+    protected String direccion;
+    protected String telefono;
+    protected String fechaNacimiento;
+    
 }
