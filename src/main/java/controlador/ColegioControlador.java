@@ -12,6 +12,9 @@ import modelo.Profesor;
 import modelo.Estudiante;
 import vista.ColegioVista;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class ColegioControlador {
     private ArrayList<Profesor> profesores;
@@ -56,7 +59,7 @@ public class ColegioControlador {
         
         profesores.add(profesor);
     }
-   
+    
     public void agregarEstudiante(String nombre, String direccion, String telefono,
                                  String fechaNacimiento, String grado, 
                                  String codigoEstudiante, double promedio) {
@@ -72,5 +75,9 @@ public class ColegioControlador {
                                               fechaNacimiento, grado, 
                                               codigoEstudiante, promedio);
         estudiantes.add(estudiante);
+    }
+    
+    public List<Profesor> obtenerProfesores() {
+        return Collections.unmodifiableList(profesores);
     }
 }
