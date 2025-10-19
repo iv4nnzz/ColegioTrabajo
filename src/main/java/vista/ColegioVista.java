@@ -6,12 +6,16 @@ package vista;
 
 /**
  *
- * @author 9spot'
+ * @author 9spot
  */
 import controlador.ColegioControlador;
 import modelo.Profesor;
 import modelo.Estudiante;
 import javax.swing.JOptionPane;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.Period;
 
 public class ColegioVista {
     private ColegioControlador controlador;
@@ -27,7 +31,40 @@ public class ColegioVista {
         }
         mostrarMensaje("Gracias por usar el Sistema del Colegio");
     }
-  
+
+    private boolean esFechaValida(String fecha) {
+        try {
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate.parse(fecha, fmt);
+            return true;
+        } catch (DateTimeParseException ex) {
+            try {
+                DateTimeFormatter fmt2 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                LocalDate.parse(fecha, fmt2);
+                return true;
+            } catch (DateTimeParseException e) {
+                return false;
+            }
+        }
+    }
+    
+    private int calcularEdadDesdeFecha(String fecha) {
+        try {
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate fechaNac;
+            try {
+                fechaNac = LocalDate.parse(fecha, fmt);
+            } catch (DateTimeParseException ex) {
+                DateTimeFormatter fmt2 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                fechaNac = LocalDate.parse(fecha, fmt2);
+            }
+            LocalDate hoy = LocalDate.now();
+            return Period.between(fechaNac, hoy).getYears();
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+    
     public String solicitarDato(String mensaje) {
         String dato = JOptionPane.showInputDialog(mensaje);
         if (dato != null && dato.trim().isEmpty()) {
