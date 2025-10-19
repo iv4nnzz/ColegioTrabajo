@@ -84,4 +84,13 @@ public class ColegioControlador {
     public List<Estudiante> obtenerEstudiantes() {
         return Collections.unmodifiableList(estudiantes);
     }
+    
+    public void ordenarProfesoresPorSalario() {
+        Collections.sort(profesores, new Comparator<Profesor>() {
+            @Override
+            public int compare(Profesor p1, Profesor p2) {
+                return Double.compare(p1.calcularSalarioTotal(), p2.calcularSalarioTotal());
+            }
+        });
+    }
 }
