@@ -8,10 +8,35 @@ package modelo;
  *
  * @author 9spot
  */
+
 public class Persona {
     protected String nombre;
     protected String direccion;
     protected String telefono;
     protected String fechaNacimiento;
     
+    public Persona() {
+        this.nombre = "";
+        this.direccion = "";
+        this.telefono = "";
+        this.fechaNacimiento = "";
+    }
+    
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+    
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+    
 }
+
