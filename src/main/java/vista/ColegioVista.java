@@ -153,7 +153,7 @@ public class ColegioVista {
         
         StringBuilder reporte = new StringBuilder();
         
-        reporte.append("REPORTE DE ESTUDIANTES\n");
+        reporte.append("REPORTE DE ESTUDIANTES\n\n");
         
         List<Estudiante> estudiantes = controlador.obtenerEstudiantes();
         
@@ -163,10 +163,12 @@ public class ColegioVista {
             for (int i = 0; i < estudiantes.size(); i++) {
                 reporte.append("ESTUDIANTE #").append(i + 1).append(" ─────────────────────────────\n");
                 reporte.append(estudiantes.get(i).obtenerInfo());
+                reporte.append("\n");
             }
+            reporte.append("\n");
         }
         
-        reporte.append("REPORTE DE PROFESORES (Ordenado por Salario)\n");
+        reporte.append("REPORTE DE PROFESORES (Ordenado por Salario)\n\n");
         
         List<Profesor> profesores = controlador.obtenerProfesores();
         
@@ -176,13 +178,16 @@ public class ColegioVista {
             controlador.ordenarProfesoresPorSalario();
             
             for (int i = 0; i < profesores.size(); i++) {
-                reporte.append("┌─ PROFESOR #").append(i + 1).append(" ──────────────────────────────\n");
+                reporte.append("PROFESOR #").append(i + 1).append(" ──────────────────────────────\n");
                 reporte.append(profesores.get(i).obtenerInfo());
+                reporte.append("\n");
             }
             
             double totalPrestaciones = controlador.calcularTotalPrestaciones();
+            reporte.append("\n");
             reporte.append("TOTAL PRESTACIONES SOCIALES: $");
-            reporte.append(String.format("%-20.2f", totalPrestaciones));
+            reporte.append(String.format("%.2f", totalPrestaciones));
+            reporte.append("\n\n");
         }
         
         JTextArea textArea = new JTextArea(reporte.toString());
