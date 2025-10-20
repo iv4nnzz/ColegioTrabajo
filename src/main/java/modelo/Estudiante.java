@@ -26,6 +26,10 @@ public class Estudiante extends Persona {
         this.promedio = promedio;
     }
     
+    public String getCodigoEstudiante() {
+    return codigoEstudiante;
+    }
+    
     public boolean aprobo() {
         return promedio >= 3.0;
     }
