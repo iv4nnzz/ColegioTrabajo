@@ -30,6 +30,19 @@ public class ColegioControlador {
     public void agregarProfesor(String nombre, String direccion, String telefono, 
                                String fechaNacimiento, String cedula, String area,
                                double salarioPorHora, int horasTrabajadas) {
+        cedula = cedula != null ? cedula.trim() : "";
+        nombre = nombre != null ? nombre.trim() : "";
+        direccion = direccion != null ? direccion.trim() : "";
+        telefono = telefono != null ? telefono.trim() : "";
+        fechaNacimiento = fechaNacimiento != null ? fechaNacimiento.trim() : "";
+        area = area != null ? area.trim() : "";
+
+        for (Profesor p : profesores) {
+            if (p.getCedula().equalsIgnoreCase(cedula)) {
+                throw new IllegalArgumentException(
+                    "Ya existe un profesor registrado con la cédula: " + cedula);
+            }
+        }
         Profesor profesor = new Profesor();
         profesor.setNombre(nombre);
         profesor.setDireccion(direccion);
@@ -63,6 +76,19 @@ public class ColegioControlador {
     public void agregarEstudiante(String nombre, String direccion, String telefono,
                                  String fechaNacimiento, String grado, 
                                  String codigoEstudiante, double promedio) {
+        codigoEstudiante = codigoEstudiante != null ? codigoEstudiante.trim() : "";
+        nombre = nombre != null ? nombre.trim() : "";
+        direccion = direccion != null ? direccion.trim() : "";
+        telefono = telefono != null ? telefono.trim() : "";
+        fechaNacimiento = fechaNacimiento != null ? fechaNacimiento.trim() : "";
+        grado = grado != null ? grado.trim() : "";
+
+        for (Estudiante e : estudiantes) {
+            if (e.getCodigoEstudiante().equalsIgnoreCase(codigoEstudiante)) {
+                throw new IllegalArgumentException(
+                    "Ya existe un estudiante registrado con el código: " + codigoEstudiante);
+            }
+}
         if (promedio < 0.0 || promedio > 5.0) {
             throw new IllegalArgumentException("El promedio debe estar entre 0.0 y 5.0");
         }
