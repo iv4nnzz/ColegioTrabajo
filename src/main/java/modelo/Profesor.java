@@ -30,6 +30,10 @@ public class Profesor extends Persona {
         this.horasTrabajadas = horasTrabajadas;
     }
     
+    public String getCedula() {
+    return cedula;
+}
+    
     public double calcularSalarioTotal() {
         double salarioBase = salarioPorHora * horasTrabajadas;
         double bonificacion = salarioBase * 0.20; 
