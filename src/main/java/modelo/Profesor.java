@@ -56,6 +56,16 @@ public class Profesor extends Persona {
         return calcularSalarioTotal() * 0.17;
     }
     
+    //sobrecarga para las prestaciones
+    public double calcularPrestaciones(double porcentajePrestaciones) {
+        return calcularSalarioTotal() * porcentajePrestaciones;
+    }
+    
+    public double calcularPrestaciones(int horas, double porcentajePrestaciones) {
+        return calcularSalarioTotal(horas) * porcentajePrestaciones;
+    }
+
+    
     @Override
     public String obtenerInfo() {
         return super.obtenerInfo() + "\n" +
